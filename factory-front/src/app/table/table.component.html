@@ -1,3 +1,40 @@
-<p>
-  table works!
-</p>
+<div class="col-md-12">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="hidden">Id</th>
+          <th>Numero de table</th>
+          <th>Supprimer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let table of tables">
+          <td class="hidden">{{table.id}}</td>
+          <td>{{table.tableNumero}}</td>
+          <td><button class="btn btn-danger" (click)="deleteTable(table)">Supprimer table</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="pt-4">
+    <p>
+      <button class="btn btn-primary" type="button" (click)="isEditCollapsed = !isEditCollapsed">
+        Ajouter une table
+      </button>
+    </p>
+    <div *ngIf="isEditCollapsed">
+      <div class="card card-body">
+        <form>
+          <div class="form-group">
+            <label for="tableNumero">Numero de table:</label>
+            <input [(ngModel)]="newTable.tableNumero" placeholder="Numéro de table" name="tableNumero" class="form-control" id="tableNumero">
+          </div>
+  
+          <button class="btn btn-success" (click)="createTable()">Créer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -23,5 +23,29 @@ public class Statut
 	@OneToMany(mappedBy = "statut") 
 	private Set<Realisation> realisation;
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getStatutNom() {
+		return statutNom;
+	}
+
+	public void setStatutNom(String statutNom) {
+		this.statutNom = statutNom;
+	}
+
+	public Set<Realisation> getRealisation() {
+		return realisation;
+	}
+
+	public void setRealisation(Set<Realisation> realisation) {
+		this.realisation = realisation;
+	}
+
 }
 

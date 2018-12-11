@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 
 @Entity
@@ -22,6 +21,30 @@ public class TableUsine
 
 	@OneToOne 
 	protected Ouvrier ouvrier;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTableNumero() {
+		return tableNumero;
+	}
+
+	public void setTableNumero(String tableNumero) {
+		this.tableNumero = tableNumero;
+	}
+
+	public Ouvrier getOuvrier() {
+		return ouvrier;
+	}
+
+	public void setOuvrier(Ouvrier ouvrier) {
+		this.ouvrier = ouvrier;
+	}
 
 }
 

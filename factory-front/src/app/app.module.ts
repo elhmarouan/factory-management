@@ -9,7 +9,9 @@ import { OuvrierComponent } from './ouvrier/ouvrier.component';
 import { OuvrierService } from './ouvrier/ouvrier.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from './table/table.component';
+import { TableService } from './table/table.service';
 import { ArticleComponent } from './article/article.component';
+import { ArticleService } from './article/article.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { ArticleComponent } from './article/article.component';
     FormsModule,
     NgbModule.forRoot()
   ],
-  providers: [OuvrierService],
+  providers: [OuvrierService, TableService, ArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

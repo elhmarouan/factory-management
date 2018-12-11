@@ -23,16 +23,17 @@ export class OuvrierComponent implements OnInit {
   }
 
   deleteOuvrier(ouvrier: Ouvrier): void {
-    this.ouvrierService.deleteOuvrier(ouvrier)
+    if(confirm("Etes vous sur de supprimer l'ouvrier "+ouvrier.ouvrierNom+" ?")) {
+      this.ouvrierService.deleteOuvrier(ouvrier)
       .subscribe( data => {
         this.ouvriers = this.ouvriers.filter(u => u !== ouvrier);
       })
+    }
   };
 
   createOuvrier(): void {
     this.ouvrierService.createOuvrier(this.newOuvrier)
         .subscribe( data => {
-          alert("Ouvrier créé avec succès");
           this.ngOnInit();
           this.newOuvrier = new Ouvrier();
           this.isEditCollapsed = false;

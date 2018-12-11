@@ -1,5 +1,7 @@
 package ma.tetouan.factoryrest.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,11 +19,11 @@ public class Realisation
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(nullable = false) 
-	private String dateDebut;
+	@Column
+	private Date dateDebut;
 
-	@Column(nullable = false) 
-	private String dateFin;
+	@Column
+	private Date dateFin;
 
 	@ManyToOne 
 	@JoinColumn(nullable = false) 
@@ -33,6 +35,38 @@ public class Realisation
 	@ManyToOne 
 	@JoinColumn(nullable = false) 
 	private Ouvrier ouvrier;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Statut getStatut() {
+		return statut;
+	}
+
+	public void setStatut(Statut statut) {
+		this.statut = statut;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	public Ouvrier getOuvrier() {
+		return ouvrier;
+	}
+
+	public void setOuvrier(Ouvrier ouvrier) {
+		this.ouvrier = ouvrier;
+	}
 
 }
 
