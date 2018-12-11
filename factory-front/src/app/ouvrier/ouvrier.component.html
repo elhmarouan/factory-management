@@ -1,0 +1,47 @@
+<div class="col-md-12">
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ouvrier of ouvriers">
+        <td class="hidden">{{ouvrier.id}}</td>
+        <td>{{ouvrier.ouvrierNom}}</td>
+        <td>{{ouvrier.ouvrierPrenom}}</td>
+        <td><button class="btn btn-danger" (click)="deleteOuvrier(ouvrier)"> Supprimer ouvrier</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pt-4">
+  <p>
+    <button class="btn btn-primary" type="button" (click)="isEditCollapsed = !isEditCollapsed">
+      Ajouter un ouvrier
+    </button>
+  </p>
+  <div *ngIf="isEditCollapsed">
+    <div class="card card-body">
+      <form>
+        <div class="form-group">
+          <label for="lastName">Nom:</label>
+          <input [(ngModel)]="newOuvrier.ouvrierNom" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+        </div>
+
+        <div class="form-group">
+          <label for="firstName">Prénom:</label>
+          <input [(ngModel)]="newOuvrier.ouvrierPrenom" placeholder="First Name" name="firstName" class="form-control"
+            id="firstName">
+        </div>
+
+        <button class="btn btn-success" (click)="createOuvrier()">Créer</button>
+      </form>
+    </div>
+  </div>
+</div>
