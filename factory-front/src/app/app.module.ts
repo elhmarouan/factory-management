@@ -12,13 +12,17 @@ import { TableComponent } from './table/table.component';
 import { TableService } from './table/table.service';
 import { ArticleComponent } from './article/article.component';
 import { ArticleService } from './article/article.service';
+import { CommandeComponent } from './commande/commande.component';
+import { RealisationComponent } from './realisation/realisation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OuvrierComponent,
     TableComponent,
-    ArticleComponent
+    ArticleComponent,
+    CommandeComponent,
+    RealisationComponent
   ],
   imports: [
     BrowserModule,
