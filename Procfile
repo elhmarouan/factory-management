@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar factory-rest/target/factory-app.war --p $PORT
