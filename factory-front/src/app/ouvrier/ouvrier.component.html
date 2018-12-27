@@ -3,17 +3,17 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th class="hidden">Id</th>
         <th>Nom</th>
         <th>Prenom</th>
+        <th>Table</th>
         <th>Supprimer</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let ouvrier of ouvriers">
-        <td class="hidden">{{ouvrier.id}}</td>
         <td>{{ouvrier.ouvrierNom}}</td>
         <td>{{ouvrier.ouvrierPrenom}}</td>
+        <td>{{ouvrier.tableUsine.tableNumero}}</td>
         <td><button class="btn btn-danger" (click)="deleteOuvrier(ouvrier)">Supprimer ouvrier</button></td>
       </tr>
     </tbody>
@@ -38,6 +38,13 @@
           <label for="firstName">Prénom:</label>
           <input [(ngModel)]="newOuvrier.ouvrierPrenom" placeholder="First Name" name="firstName" class="form-control"
             id="firstName">
+        </div>
+
+        <div class="form-group">
+          <label for="table">Table:</label>
+          <select [(ngModel)]="newOuvrier.tableUsine" name="table" class="form-control" id="table">
+            <option *ngFor="let table of tables" [ngValue]="table">{{table.tableNumero}}</option>
+          </select>
         </div>
 
         <button class="btn btn-success" (click)="createOuvrier()">Créer</button>

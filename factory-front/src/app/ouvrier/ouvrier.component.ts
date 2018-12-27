@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Ouvrier } from '../common/model/ouvrier.model';
 import { OuvrierService } from './ouvrier.service';
+import { TableUsine } from '../common/model/table-usine.model';
+import { TableService } from '../table/table.service';
 
 @Component({
   selector: 'app-ouvrier',
@@ -10,15 +12,23 @@ import { OuvrierService } from './ouvrier.service';
 })
 export class OuvrierComponent implements OnInit {
   ouvriers: Ouvrier[];
+  tables: TableUsine[];
   newOuvrier: Ouvrier = new Ouvrier();
   isEditCollapsed: boolean = false;
 
-  constructor(private ouvrierService: OuvrierService) { }
+  constructor(private ouvrierService: OuvrierService, private tableService: TableService) { }
 
-  ngOnInit() {
+  loadOuvriers() {
     this.ouvrierService.getOuvriers()
     .subscribe( data => {
       this.ouvriers = data;
+    });
+  }
+  ngOnInit() {
+    this.loadOuvriers();
+    this.tableService.getTables()
+    .subscribe( data => {
+      this.tables = data;
     });
   }
 
@@ -34,11 +44,10 @@ export class OuvrierComponent implements OnInit {
   createOuvrier(): void {
     this.ouvrierService.createOuvrier(this.newOuvrier)
         .subscribe( data => {
-          this.ngOnInit();
+          this.loadOuvriers();
           this.newOuvrier = new Ouvrier();
           this.isEditCollapsed = false;
         });
-
   };
 
 

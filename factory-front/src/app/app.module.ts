@@ -13,7 +13,7 @@ import { TableService } from './table/table.service';
 import { ArticleComponent } from './article/article.component';
 import { ArticleService } from './article/article.service';
 import { CommandeComponent } from './commande/commande.component';
-import { RealisationComponent } from './realisation/realisation.component';
+import { CommandeService } from './commande/commande.service';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,7 @@ import { RealisationComponent } from './realisation/realisation.component';
     OuvrierComponent,
     TableComponent,
     ArticleComponent,
-    CommandeComponent,
-    RealisationComponent
+    CommandeComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +30,7 @@ import { RealisationComponent } from './realisation/realisation.component';
     FormsModule,
     NgbModule.forRoot()
   ],
-  providers: [OuvrierService, TableService, ArticleService],
+  providers: [OuvrierService, TableService, ArticleService, CommandeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,5 @@
 package ma.tetouan.factoryrest.model;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,32 +7,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity 
-public class Realisation
-{
+public class Commande {
+	
 	@Id 
 	@Column(nullable = false)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
-	@Column
-	private Date dateDebut;
-
-	@Column
-	private Date dateFin;
+	
+	@Column(nullable = false) 
+	protected String commandeNumero;
 
 	@ManyToOne 
 	@JoinColumn(nullable = false) 
-	private Statut statut;
+	@JsonBackReference
+	protected Article article;
 
-	@OneToOne 
-	private Article article;
+	@ManyToOne 
+	@JoinColumn(nullable = false)
+	@JsonBackReference
+	protected Statut statut;
 
 	@ManyToOne 
 	@JoinColumn(nullable = false) 
-	private Ouvrier ouvrier;
+	@JsonBackReference
+	protected Ouvrier ouvrier;
 
 	public Integer getId() {
 		return id;
@@ -44,12 +44,12 @@ public class Realisation
 		this.id = id;
 	}
 
-	public Statut getStatut() {
-		return statut;
+	public String getCommandeNumero() {
+		return commandeNumero;
 	}
 
-	public void setStatut(Statut statut) {
-		this.statut = statut;
+	public void setCommandeNumero(String commandeNumero) {
+		this.commandeNumero = commandeNumero;
 	}
 
 	public Article getArticle() {
@@ -58,6 +58,14 @@ public class Realisation
 
 	public void setArticle(Article article) {
 		this.article = article;
+	}
+
+	public Statut getStatut() {
+		return statut;
+	}
+
+	public void setStatut(Statut statut) {
+		this.statut = statut;
 	}
 
 	public Ouvrier getOuvrier() {
@@ -69,4 +77,3 @@ public class Realisation
 	}
 
 }
-

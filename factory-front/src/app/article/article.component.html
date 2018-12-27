@@ -3,17 +3,13 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th class="hidden">Id</th>
           <th>Numero d'article</th>
-          <th>Numero de commande</th>
           <th>Supprimer</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let article of articles">
-          <td class="hidden">{{article.id}}</td>
           <td>{{article.articleNumero}}</td>
-          <td>{{article.commandeNumero}}</td>
           <td><button class="btn btn-danger" (click)="deleteArticle(article)">Supprimer article</button></td>
         </tr>
       </tbody>
@@ -33,13 +29,6 @@
             <label for="articleNumero">Numero d'article:</label>
             <input [(ngModel)]="newArticle.articleNumero" placeholder="Numero d'article" name="articleNumero" class="form-control" id="articleNumero">
           </div>
-  
-          <div class="form-group">
-            <label for="commandeNumero">Numero de commande:</label>
-            <input [(ngModel)]="newArticle.commandeNumero" placeholder="Numero de commande" name="commandeNumero" class="form-control"
-              id="commandeNumero">
-          </div>
-  
           <button class="btn btn-success" (click)="createArticle()">Créer</button>
         </form>
       </div>

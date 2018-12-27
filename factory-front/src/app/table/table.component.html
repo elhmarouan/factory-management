@@ -3,14 +3,12 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th class="hidden">Id</th>
           <th>Numero de table</th>
           <th>Supprimer</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let table of tables">
-          <td class="hidden">{{table.id}}</td>
           <td>{{table.tableNumero}}</td>
           <td><button class="btn btn-danger" (click)="deleteTable(table)">Supprimer table</button></td>
         </tr>

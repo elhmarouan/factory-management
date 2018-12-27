@@ -1,14 +1,12 @@
 package ma.tetouan.factoryrest.model;
 
-import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity 
 public class Statut
@@ -20,8 +18,9 @@ public class Statut
 	@Column(nullable = false) 
 	private String statutNom;
 
-	@OneToMany(mappedBy = "statut") 
-	private Set<Realisation> realisation;
+	@OneToMany(mappedBy = "statut")
+    @JsonManagedReference
+	protected Set<Commande> commande;
 
 	public Integer getId() {
 		return id;
@@ -37,14 +36,6 @@ public class Statut
 
 	public void setStatutNom(String statutNom) {
 		this.statutNom = statutNom;
-	}
-
-	public Set<Realisation> getRealisation() {
-		return realisation;
-	}
-
-	public void setRealisation(Set<Realisation> realisation) {
-		this.realisation = realisation;
 	}
 
 }

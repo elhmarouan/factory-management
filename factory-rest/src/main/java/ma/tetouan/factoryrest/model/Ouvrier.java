@@ -1,6 +1,5 @@
 package ma.tetouan.factoryrest.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity 
@@ -27,11 +28,12 @@ public class Ouvrier
 	@Column(nullable = false) 
 	private String ouvrierPrenom;
 
-	@OneToOne(mappedBy = "ouvrier") 
-	private TableUsine table;
+	@OneToOne
+	private TableUsine tableUsine;
 
-	@OneToMany(mappedBy = "ouvrier") 
-	private Set<Realisation> realisation;
+	@OneToMany(mappedBy = "ouvrier")
+    @JsonManagedReference
+	private Set<Commande> commande;
 
 	public Integer getId() {
 		return id;
@@ -42,7 +44,7 @@ public class Ouvrier
 	}
 
 	public String getOuvrierNom() {
-		return this.ouvrierNom;
+		return ouvrierNom;
 	}
 
 	public void setOuvrierNom(String ouvrierNom) {
@@ -50,28 +52,29 @@ public class Ouvrier
 	}
 
 	public String getOuvrierPrenom() {
-		return this.ouvrierPrenom;
+		return ouvrierPrenom;
 	}
 
 	public void setOuvrierPrenom(String ouvrierPrenom) {
 		this.ouvrierPrenom = ouvrierPrenom;
 	}
 
-	public TableUsine getTable() {
-		return table;
+	public TableUsine getTableUsine() {
+		return tableUsine;
 	}
 
-	public void setTable(TableUsine table) {
-		this.table = table;
+	public void setTableUsine(TableUsine tableUsine) {
+		this.tableUsine = tableUsine;
 	}
 
-	public Set<Realisation> getRealisation() {
-		return realisation;
+	public Set<Commande> getCommande() {
+		return commande;
 	}
 
-	public void setRealisation(Set<Realisation> realisation) {
-		this.realisation = realisation;
+	public void setCommande(Set<Commande> commande) {
+		this.commande = commande;
 	}
+
 
 }
 

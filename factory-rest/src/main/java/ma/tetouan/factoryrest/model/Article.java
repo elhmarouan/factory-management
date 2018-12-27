@@ -1,11 +1,15 @@
 package ma.tetouan.factoryrest.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity 
 public class Article
@@ -14,15 +18,13 @@ public class Article
 	@Column(nullable = false)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
+	
 	@Column(nullable = false) 
-	private String articleNumero;
-
-	@Column
-	private String commandeNumero;
-
-	@OneToOne(mappedBy = "article") 
-	private Realisation realisation;
+	protected String articleNumero;
+	
+	@OneToMany(mappedBy = "article") 
+    @JsonManagedReference
+	protected Set<Commande> commande;
 
 	public Integer getId() {
 		return id;
@@ -40,21 +42,13 @@ public class Article
 		this.articleNumero = articleNumero;
 	}
 
-	public Realisation getRealisation() {
-		return realisation;
+	public Set<Commande> getCommande() {
+		return commande;
 	}
 
-	public void setRealisation(Realisation realisation) {
-		this.realisation = realisation;
+	public void setCommande(Set<Commande> commande) {
+		this.commande = commande;
 	}
-
-	public String getCommandeNumero() {
-		return commandeNumero;
-	}
-
-	public void setCommandeNumero(String commandeNumero) {
-		this.commandeNumero = commandeNumero;
-	}
-
+	
 }
 
