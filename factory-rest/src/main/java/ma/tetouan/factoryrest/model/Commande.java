@@ -23,17 +23,14 @@ public class Commande {
 
 	@ManyToOne 
 	@JoinColumn(nullable = false) 
-	@JsonBackReference
 	protected Article article;
 
 	@ManyToOne 
 	@JoinColumn(nullable = false)
-	@JsonBackReference
 	protected Statut statut;
 
 	@ManyToOne 
 	@JoinColumn(nullable = false) 
-	@JsonBackReference
 	protected Ouvrier ouvrier;
 
 	public Integer getId() {

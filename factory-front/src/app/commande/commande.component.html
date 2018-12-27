@@ -15,7 +15,12 @@
           <td>{{commande.commandeNumero}}</td>
           <td>{{commande.article.articleNumero}}</td>
           <td>{{commande.ouvrier.ouvrierNom}} {{commande.ouvrier.ouvrierPrenom}}</td>
-          <td>{{commande.statut.statutNom}}</td>
+          <td>
+            <select [(ngModel)]="commande.statut.id" (change)="onStatutChange($event, commande)" name="statutCommande" class="form-control" id="statutCommande">
+              <option *ngFor="let statut of statuts" [value]="statut.id">{{statut.statutNom}}</option>
+            </select>
+          </td>
+          <!-- <td>{{commande.statut.statutNom}}</td> -->
           <td><button class="btn btn-danger" (click)="deleteCommande(commande)">Supprimer commande</button></td>
         </tr>
       </tbody>

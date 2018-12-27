@@ -18,9 +18,8 @@ public class Statut
 	@Column(nullable = false) 
 	private String statutNom;
 
-	@OneToMany(mappedBy = "statut")
-    @JsonManagedReference
-	protected Set<Commande> commande;
+//	@OneToMany(mappedBy = "statut")
+//	protected Set<Commande> commande;
 
 	public Integer getId() {
 		return id;

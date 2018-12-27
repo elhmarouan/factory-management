@@ -31,9 +31,8 @@ public class Ouvrier
 	@OneToOne
 	private TableUsine tableUsine;
 
-	@OneToMany(mappedBy = "ouvrier")
-    @JsonManagedReference
-	private Set<Commande> commande;
+//	@OneToMany(mappedBy = "ouvrier")
+//	private Set<Commande> commande;
 
 	public Integer getId() {
 		return id;
@@ -67,13 +66,13 @@ public class Ouvrier
 		this.tableUsine = tableUsine;
 	}
 
-	public Set<Commande> getCommande() {
-		return commande;
-	}
-
-	public void setCommande(Set<Commande> commande) {
-		this.commande = commande;
-	}
+//	public Set<Commande> getCommande() {
+//		return commande;
+//	}
+//
+//	public void setCommande(Set<Commande> commande) {
+//		this.commande = commande;
+//	}
 
 
 }

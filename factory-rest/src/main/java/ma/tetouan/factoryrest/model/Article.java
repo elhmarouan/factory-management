@@ -22,9 +22,8 @@ public class Article
 	@Column(nullable = false) 
 	protected String articleNumero;
 	
-	@OneToMany(mappedBy = "article") 
-    @JsonManagedReference
-	protected Set<Commande> commande;
+//	@OneToMany(mappedBy = "article") 
+//	protected Set<Commande> commande;
 
 	public Integer getId() {
 		return id;
@@ -42,13 +41,13 @@ public class Article
 		this.articleNumero = articleNumero;
 	}
 
-	public Set<Commande> getCommande() {
-		return commande;
-	}
-
-	public void setCommande(Set<Commande> commande) {
-		this.commande = commande;
-	}
+//	public Set<Commande> getCommande() {
+//		return commande;
+//	}
+//
+//	public void setCommande(Set<Commande> commande) {
+//		this.commande = commande;
+//	}
 	
 }
 

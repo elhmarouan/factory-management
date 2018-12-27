@@ -7,7 +7,6 @@ import { CommandeService } from '../commande/commande.service';
 import { ArticleService } from '../article/article.service';
 import { Statut } from '../common/model/statut.model';
 
-
 @Component({
   selector: 'app-commande',
   templateUrl: './commande.component.html',
@@ -21,7 +20,7 @@ export class CommandeComponent implements OnInit {
   statuts: Statut[];
   isEditCollapsed: boolean = false;
 
-  constructor(private commandeService: CommandeService, private ouvrierService: OuvrierService, private articleService: ArticleService) { }
+  constructor(private commandeService: CommandeService, private ouvrierService: OuvrierService, private articleService: ArticleService, ) { }
 
   loadCommands() {
     this.commandeService.getCommandes()
@@ -43,6 +42,14 @@ export class CommandeComponent implements OnInit {
     this.commandeService.getStatuts()
     .subscribe( data => {
       this.statuts = data;
+    });
+  }
+
+  onStatutChange(event, commande): void {
+    this.commandeService.createCommande(commande)
+    .subscribe( data => {
+      // this.loadCommands();
+      alert("Le statut de la commande "+commande.commandeNumero+" a été modifié.");
     });
   }
 
