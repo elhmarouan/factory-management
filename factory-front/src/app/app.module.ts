@@ -14,6 +14,8 @@ import { ArticleComponent } from './article/article.component';
 import { ArticleService } from './article/article.service';
 import { CommandeComponent } from './commande/commande.component';
 import { CommandeService } from './commande/commande.service';
+import { FilterPipe } from './common/pipes/filter.pipe';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,15 @@ import { CommandeService } from './commande/commande.service';
     OuvrierComponent,
     TableComponent,
     ArticleComponent,
-    CommandeComponent
+    CommandeComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    AngularFontAwesomeModule,
     NgbModule.forRoot()
   ],
   providers: [OuvrierService, TableService, ArticleService, CommandeService],

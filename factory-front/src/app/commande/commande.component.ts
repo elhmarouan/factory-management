@@ -14,11 +14,13 @@ import { Statut } from '../common/model/statut.model';
 })
 export class CommandeComponent implements OnInit {
   commandes: Commande[];
-  newCommande: Commande = new Commande();
+  newCommande: Commande;
   articles: Article[];
   ouvriers: Ouvrier[];
   statuts: Statut[];
   isEditCollapsed: boolean = false;
+  searchString: string;
+  searchStatut: number;
 
   constructor(private commandeService: CommandeService, private ouvrierService: OuvrierService, private articleService: ArticleService, ) { }
 
@@ -27,6 +29,8 @@ export class CommandeComponent implements OnInit {
     .subscribe( data => {
       this.commandes = data;
     });
+    this.newCommande = new Commande();
+    this.newCommande.statut = {id: 0, statutNom: 'Non initié'};
   }
 
   ngOnInit() {
@@ -66,7 +70,6 @@ export class CommandeComponent implements OnInit {
     this.commandeService.createCommande(this.newCommande)
         .subscribe( data => {
           this.loadCommands();
-          this.newCommande = new Commande();
           this.isEditCollapsed = false;
         });
   };

@@ -1,3 +1,26 @@
+<div class="col-md-12">
+    <form>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><fa name="search"></fa></span>
+            </div>
+            <input type="text" class="form-control" name="searchString" placeholder="Rechercher..." [(ngModel)]="searchString">
+            <button type="button" (click)="searchString=undefined" class="btn btn-secondary btn-sm ml-3"><fa name="minus"></fa></button>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Statut</span>
+            </div>
+            <select [(ngModel)]="searchStatut" name="searchStatut" class="form-control" id="searchStatut">
+                <option disabled [value]="undefined">Rechercher par statut</option>
+                <option *ngFor="let statut of statuts" [value]="statut.id">{{statut.statutNom}}</option>
+            </select>
+            <button type="button" (click)="searchStatut=undefined" class="btn btn-secondary btn-sm ml-3"><fa name="minus"></fa></button>
+        </div>
+    </form>
+</div>
+
 <div class="col-md-12 table-responsive">
 
     <table class="table table-striped">
@@ -11,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let commande of commandes">
+        <tr *ngFor="let commande of commandes | filter : searchStatut : searchString">
           <td>{{commande.commandeNumero}}</td>
           <td>{{commande.article.articleNumero}}</td>
           <td>{{commande.ouvrier.ouvrierNom}} {{commande.ouvrier.ouvrierPrenom}}</td>
@@ -27,7 +50,7 @@
     </table>
   </div>
   
-  <div class="pt-4">
+  <div class="pt-4 col-md-12">
     <p>
       <button class="btn btn-primary" type="button" (click)="isEditCollapsed = !isEditCollapsed">
         Ajouter une commande
@@ -44,6 +67,7 @@
           <div class="form-group">
             <label for="article">Article:</label>
             <select [(ngModel)]="newCommande.article" name="article" class="form-control" id="article">
+              <option disabled [value]="undefined">Choisissez un article</option>
               <option *ngFor="let article of articles" [ngValue]="article">{{article.articleNumero}}</option>
             </select>
           </div>
@@ -51,14 +75,15 @@
           <div class="form-group">
               <label for="article">Ouvrier:</label>
               <select [(ngModel)]="newCommande.ouvrier" name="ouvrier" class="form-control" id="ouvrier">
+                <option disabled [value]="undefined">Choisissez un ouvrier</option>
                 <option *ngFor="let ouvrier of ouvriers" [ngValue]="ouvrier">{{ouvrier.ouvrierNom}} {{ouvrier.ouvrierPrenom}}</option>
               </select>
           </div>   
 
           <div class="form-group">
               <label for="article">Statut:</label>
-              <select [(ngModel)]="newCommande.statut" name="statut" class="form-control" id="statut">
-                <option *ngFor="let statut of statuts" [ngValue]="statut">{{statut.statutNom}}</option>
+              <select [(ngModel)]="newCommande.statut.id" name="statut" class="form-control" id="statut">
+                <option *ngFor="let statut of statuts" [ngValue]="statut.id">{{statut.statutNom}}</option>
               </select>
           </div>   
   

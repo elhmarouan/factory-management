@@ -20,7 +20,7 @@
   </table>
 </div>
 
-<div class="pt-4">
+<div class="pt-4 col-md-12">
   <p>
     <button class="btn btn-primary" type="button" (click)="isEditCollapsed = !isEditCollapsed">
       Ajouter un ouvrier
@@ -43,6 +43,7 @@
         <div class="form-group">
           <label for="table">Table:</label>
           <select [(ngModel)]="newOuvrier.tableUsine" name="table" class="form-control" id="table">
+            <option disabled [value]="undefined">Choisissez une table</option>
             <option *ngFor="let table of tables" [ngValue]="table">{{table.tableNumero}}</option>
           </select>
         </div>
