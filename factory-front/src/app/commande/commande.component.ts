@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Commande } from '../common/model/commande.model';
 import { Article } from '../common/model/article.model';
 import { Ouvrier } from '../common/model/ouvrier.model';
@@ -21,8 +23,10 @@ export class CommandeComponent implements OnInit {
   isEditCollapsed: boolean = false;
   searchString: string;
   searchStatut: number;
+  createForm: FormGroup;
+  submitted = false;
 
-  constructor(private commandeService: CommandeService, private ouvrierService: OuvrierService, private articleService: ArticleService, ) { }
+  constructor(private commandeService: CommandeService, private ouvrierService: OuvrierService, private articleService: ArticleService, private formBuilder: FormBuilder) { }
 
   loadCommands() {
     this.commandeService.getCommandes()
@@ -34,6 +38,12 @@ export class CommandeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createForm = this.formBuilder.group({
+      commandNumber: ['', Validators.required],
+      article: ['', Validators.required],
+      ouvrier: ['', Validators.required],
+      statut: ['', Validators.required]
+    });
     this.loadCommands();
     this.ouvrierService.getOuvriers()
     .subscribe( data => {
@@ -48,6 +58,9 @@ export class CommandeComponent implements OnInit {
       this.statuts = data;
     });
   }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.createForm.controls; }
 
   onStatutChange(event, commande): void {
     this.commandeService.createCommande(commande)
@@ -67,11 +80,17 @@ export class CommandeComponent implements OnInit {
   };
 
   createCommande(): void {
-    this.commandeService.createCommande(this.newCommande)
-        .subscribe( data => {
-          this.loadCommands();
-          this.isEditCollapsed = false;
-        });
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.createForm.invalid) {
+      return;
+    } else {
+      this.commandeService.createCommande(this.newCommande)
+      .subscribe( data => {
+        this.loadCommands();
+        this.isEditCollapsed = false;
+      });
+    }
   };
 
 

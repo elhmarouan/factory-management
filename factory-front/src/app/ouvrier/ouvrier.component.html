@@ -6,7 +6,7 @@
         <th>Nom</th>
         <th>Prenom</th>
         <th>Table</th>
-        <th>Supprimer</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -14,7 +14,7 @@
         <td>{{ouvrier.ouvrierNom}}</td>
         <td>{{ouvrier.ouvrierPrenom}}</td>
         <td>{{ouvrier.tableUsine.tableNumero}}</td>
-        <td><button class="btn btn-danger" (click)="deleteOuvrier(ouvrier)">Supprimer</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="deleteOuvrier(ouvrier)"><fa name="trash"></fa></button></td>
       </tr>
     </tbody>
   </table>
@@ -28,27 +28,38 @@
   </p>
   <div *ngIf="isEditCollapsed">
     <div class="card card-body">
-      <form>
+      <form [formGroup]="createForm" (ngSubmit)="createOuvrier()">
         <div class="form-group">
           <label for="lastName">Nom:</label>
-          <input [(ngModel)]="newOuvrier.ouvrierNom" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+          <input [(ngModel)]="newOuvrier.ouvrierNom" placeholder="Nom" name="lastName" class="form-control" id="lastName" 
+            formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+              <div *ngIf="f.lastName.errors.required">Le nom de l'ouvrier est requis</div>
+            </div>            
         </div>
 
         <div class="form-group">
           <label for="firstName">Prénom:</label>
-          <input [(ngModel)]="newOuvrier.ouvrierPrenom" placeholder="First Name" name="firstName" class="form-control"
-            id="firstName">
+          <input [(ngModel)]="newOuvrier.ouvrierPrenom" placeholder="Prénom" name="firstName" class="form-control"
+            id="firstName" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">Le prénom de l'ouvrier est requis</div>
+          </div>  
         </div>
 
         <div class="form-group">
           <label for="table">Table:</label>
-          <select [(ngModel)]="newOuvrier.tableUsine" name="table" class="form-control" id="table">
+          <select [(ngModel)]="newOuvrier.tableUsine" name="table" class="form-control" id="table"
+            formControlName="table" [ngClass]="{ 'is-invalid': submitted && f.table.errors }">
             <option disabled [value]="undefined">Choisissez une table</option>
             <option *ngFor="let table of tables" [ngValue]="table">{{table.tableNumero}}</option>
           </select>
+          <div *ngIf="submitted && f.table.errors" class="invalid-feedback">
+            <div *ngIf="f.table.errors.required">La table est requise</div>
+          </div>  
         </div>
 
-        <button class="btn btn-success" (click)="createOuvrier()">Créer</button>
+        <button class="btn btn-success">Créer</button>
       </form>
     </div>
   </div>

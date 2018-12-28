@@ -4,13 +4,13 @@
       <thead>
         <tr>
           <th>Numero d'article</th>
-          <th>Supprimer</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let article of articles">
           <td>{{article.articleNumero}}</td>
-          <td><button class="btn btn-danger" (click)="deleteArticle(article)">Supprimer</button></td>
+          <td><button class="btn btn-danger btn-sm" (click)="deleteArticle(article)"><fa name="trash"></fa></button></td>
         </tr>
       </tbody>
     </table>
@@ -24,12 +24,16 @@
     </p>
     <div *ngIf="isEditCollapsed">
       <div class="card card-body">
-        <form>
+        <form [formGroup]="createForm" (ngSubmit)="createArticle()">
           <div class="form-group">
             <label for="articleNumero">Numero d'article:</label>
-            <input [(ngModel)]="newArticle.articleNumero" placeholder="Numero d'article" name="articleNumero" class="form-control" id="articleNumero">
+            <input [(ngModel)]="newArticle.articleNumero" placeholder="Numero d'article" name="articleNumero" class="form-control" id="articleNumero"
+            formControlName="articleNumero" [ngClass]="{ 'is-invalid': submitted && f.articleNumero.errors }">
+            <div *ngIf="submitted && f.articleNumero.errors" class="invalid-feedback">
+              <div *ngIf="f.articleNumero.errors.required">Le numéro de l'article est requis</div>
+            </div> 
           </div>
-          <button class="btn btn-success" (click)="createArticle()">Créer</button>
+          <button class="btn btn-success">Créer</button>
         </form>
       </div>
     </div>

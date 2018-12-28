@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TableUsine } from '../common/model/table-usine.model';
 import { TableService } from './table.service';
@@ -12,33 +13,50 @@ export class TableComponent implements OnInit {
   tables: TableUsine[];
   newTable: TableUsine = new TableUsine();
   isEditCollapsed: boolean = false;
+  createForm: FormGroup;
+  submitted = false;
 
-  constructor(private tableService: TableService) { }
+  constructor(private tableService: TableService, private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
+  loadTables() {
     this.tableService.getTables()
-    .subscribe( data => {
-      this.tables = data;
-    });
+      .subscribe(data => {
+        this.tables = data;
+      });
   }
 
+  ngOnInit() {
+    this.createForm = this.formBuilder.group({
+      tableNumero: ['', Validators.required]
+    });
+    this.loadTables();
+  }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.createForm.controls; }
+
   deleteTable(table: TableUsine): void {
-    if(confirm("Etes vous sur de supprimer la table "+table.tableNumero+" ?")) {
+    if (confirm("Etes vous sur de supprimer la table " + table.tableNumero + " ?")) {
       this.tableService.deleteTable(table)
-      .subscribe( data => {
-        this.tables = this.tables.filter(u => u !== table);
-      })
+        .subscribe(data => {
+          this.tables = this.tables.filter(u => u !== table);
+        })
     }
   };
 
   createTable(): void {
-    this.tableService.createTable(this.newTable)
-        .subscribe( data => {
-          this.ngOnInit();
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.createForm.invalid) {
+      return;
+    } else {
+      this.tableService.createTable(this.newTable)
+        .subscribe(data => {
+          this.loadTables();
           this.newTable = new TableUsine();
           this.isEditCollapsed = false;
         });
-
+    }
   };
 
 }

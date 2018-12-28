@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { CommandeComponent } from './commande/commande.component';
 import { CommandeService } from './commande/commande.service';
 import { FilterPipe } from './common/pipes/filter.pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,8 +32,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgHttpLoaderModule.forRoot(),
     FormsModule,
     AngularFontAwesomeModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgbModule.forRoot()
   ],
   providers: [OuvrierService, TableService, ArticleService, CommandeService],

@@ -4,14 +4,14 @@
       <thead>
         <tr>
           <th>Numero de table</th>
-          <th>Supprimer</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let table of tables">
           <td>{{table.tableNumero}}</td>
           <td>
-            <button class="btn btn-danger" (click)="deleteTable(table)">Supprimer</button></td>
+            <button class="btn btn-sm btn-danger" (click)="deleteTable(table)"><fa name="trash"></fa></button></td>
         </tr>
       </tbody>
     </table>
@@ -25,13 +25,15 @@
     </p>
     <div *ngIf="isEditCollapsed">
       <div class="card card-body">
-        <form>
+        <form [formGroup]="createForm" (ngSubmit)="createTable()">
           <div class="form-group">
             <label for="tableNumero">Numero de table:</label>
-            <input [(ngModel)]="newTable.tableNumero" placeholder="Numéro de table" name="tableNumero" class="form-control" id="tableNumero">
+            <input [(ngModel)]="newTable.tableNumero" placeholder="Numéro de table" formControlName="tableNumero" [ngClass]="{ 'is-invalid': submitted && f.tableNumero.errors }" class="form-control" id="tableNumero">
+            <div *ngIf="submitted && f.tableNumero.errors" class="invalid-feedback">
+              <div *ngIf="f.tableNumero.errors.required">Le numéro de table est requis</div>
+            </div>
           </div>
-  
-          <button class="btn btn-success" (click)="createTable()">Créer</button>
+          <button class="btn btn-success">Créer</button>
         </form>
       </div>
     </div>
