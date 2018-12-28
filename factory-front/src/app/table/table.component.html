@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 table-responsive">
 
     <table class="table table-striped">
       <thead>
@@ -10,7 +10,8 @@
       <tbody>
         <tr *ngFor="let table of tables">
           <td>{{table.tableNumero}}</td>
-          <td><button class="btn btn-danger" (click)="deleteTable(table)">Supprimer table</button></td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteTable(table)">Supprimer</button></td>
         </tr>
       </tbody>
     </table>
