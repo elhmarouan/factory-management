@@ -6,7 +6,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/commande">Commandes</a>
         </li>
@@ -20,6 +20,9 @@
           <a class="nav-link" routerLink="/table">Tables</a>
         </li>
       </ul>
+      <span>
+        <button (click)="logout()"><fa name="sign-out"></fa> Déconnexion</button>
+      </span>
     </div>
   </nav>
 

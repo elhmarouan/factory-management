@@ -17,6 +17,7 @@ import { CommandeComponent } from './commande/commande.component';
 import { CommandeService } from './commande/commande.service';
 import { FilterPipe } from './common/pipes/filter.pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     TableComponent,
     ArticleComponent,
     CommandeComponent,
-    FilterPipe
+    FilterPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
