@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +18,7 @@ import { CommandeService } from './commande/commande.service';
 import { FilterPipe } from './common/pipes/filter.pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomErrorHandler } from './common/custom-error-handler';
 
 @NgModule({
   declarations: [
@@ -35,10 +36,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgHttpLoaderModule.forRoot(),
     FormsModule,
     AngularFontAwesomeModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     NgbModule.forRoot()
   ],
-  providers: [OuvrierService, TableService, ArticleService, CommandeService],
+  providers: [OuvrierService, TableService, ArticleService, CommandeService, {
+    provide: ErrorHandler,
+    useClass: CustomErrorHandler,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
