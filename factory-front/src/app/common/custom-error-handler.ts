@@ -7,5 +7,6 @@ export class CustomErrorHandler implements ErrorHandler {
     // your custom error handling logic
     console.log(error.error.message);
     alert('Une erreur technique est survenue : '+error.error.message);
+    throw error;
   }
 }

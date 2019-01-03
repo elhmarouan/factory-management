@@ -8,7 +8,7 @@ import { CommandeComponent } from './commande/commande.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  // { path: 'login', component: LoginComponent },
   { path: 'ouvrier', component: OuvrierComponent },
   { path: 'table', component: TableComponent },
   { path: 'article', component: ArticleComponent },
