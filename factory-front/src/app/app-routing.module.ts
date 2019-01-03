@@ -7,6 +7,11 @@ import { ArticleComponent } from './article/article.component';
 import { CommandeComponent } from './commande/commande.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'commande'
+  },
   { path: 'ouvrier', component: OuvrierComponent },
   { path: 'table', component: TableComponent },
   { path: 'article', component: ArticleComponent },
