@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { FormsModule } from '@angular/forms';
 
@@ -17,8 +17,10 @@ import { CommandeComponent } from './commande/commande.component';
 import { CommandeService } from './commande/commande.service';
 import { FilterPipe } from './common/pipes/filter.pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomErrorHandler } from './common/custom-error-handler';
+import { TokenInterceptor } from './common/auth/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { CustomErrorHandler } from './common/custom-error-handler';
     TableComponent,
     ArticleComponent,
     CommandeComponent,
-    FilterPipe
+    FilterPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +42,21 @@ import { CustomErrorHandler } from './common/custom-error-handler';
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     NgbModule.forRoot()
   ],
-  providers: [OuvrierService, TableService, ArticleService, CommandeService, {
-    provide: ErrorHandler,
-    useClass: CustomErrorHandler,
-  }],
+  providers: [
+    OuvrierService,
+    TableService,
+    ArticleService,
+    CommandeService,
+    {
+      provide: ErrorHandler,
+      useClass: CustomErrorHandler,
+    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
