@@ -30,6 +30,9 @@ export class TableComponent implements OnInit {
       tableNumero: ['', Validators.required]
     });
     this.loadTables();
+    this.newTable = new TableUsine();
+    this.isEditCollapsed = false;
+    this.submitted = false;
   }
 
   // convenience getter for easy access to form fields
@@ -52,11 +55,8 @@ export class TableComponent implements OnInit {
     } else {
       this.tableService.createTable(this.newTable)
         .subscribe(data => {
-          this.loadTables();
-          this.newTable = new TableUsine();
-          this.isEditCollapsed = false;
+          this.ngOnInit();
         });
     }
   };
-
 }

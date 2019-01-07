@@ -88,6 +88,13 @@ export class CommandeComponent implements OnInit {
       this.commandeService.createCommande(this.newCommande)
       .subscribe( data => {
         this.loadCommands();
+        this.createForm = this.formBuilder.group({
+          commandNumber: ['', Validators.required],
+          article: ['', Validators.required],
+          ouvrier: ['', Validators.required],
+          statut: ['', Validators.required]
+        });
+        this.submitted = false;
         this.isEditCollapsed = false;
       });
     }

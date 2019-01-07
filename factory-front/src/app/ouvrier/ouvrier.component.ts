@@ -27,6 +27,7 @@ export class OuvrierComponent implements OnInit {
         this.ouvriers = data;
       });
   }
+
   ngOnInit() {
     this.createForm = this.formBuilder.group({
       lastName: ['', Validators.required],
@@ -35,9 +36,12 @@ export class OuvrierComponent implements OnInit {
     });
     this.loadOuvriers();
     this.tableService.getTables()
-      .subscribe(data => {
-        this.tables = data;
-      });
+    .subscribe(data => {
+      this.tables = data;
+    });
+    this.newOuvrier = new Ouvrier();
+    this.isEditCollapsed = false;
+    this.submitted = false;
   }
 
   // convenience getter for easy access to form fields
@@ -60,13 +64,9 @@ export class OuvrierComponent implements OnInit {
     } else {
       this.ouvrierService.createOuvrier(this.newOuvrier)
         .subscribe(data => {
-          this.loadOuvriers();
-          this.newOuvrier = new Ouvrier();
-          this.isEditCollapsed = false;
+          this.ngOnInit();
         });
     }
   };
-
-
 
 }

@@ -30,6 +30,8 @@ export class ArticleComponent implements OnInit {
     });
     this.loadArticles();
     this.newArticle = new Article();
+    this.isEditCollapsed = false;
+    this.submitted = false;
   }
 
   // convenience getter for easy access to form fields
@@ -52,9 +54,7 @@ export class ArticleComponent implements OnInit {
     } else {
       this.articleService.createArticle(this.newArticle)
       .subscribe( data => {
-        this.loadArticles();
-        this.newArticle = new Article();
-        this.isEditCollapsed = false;
+        this.ngOnInit();
       });
     }
   };
