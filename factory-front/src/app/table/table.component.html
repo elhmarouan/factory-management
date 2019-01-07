@@ -11,7 +11,13 @@
         <tr *ngFor="let table of tables">
           <td>{{table.tableNumero}}</td>
           <td>
-            <button class="btn btn-sm btn-danger" (click)="deleteTable(table)"><fa name="trash"></fa></button></td>
+            <span>
+                <button class="btn btn-sm btn-danger" (click)="deleteTable(table)"><fa name="trash"></fa></button>
+            </span>
+            <span class="ml-2">
+                <button class="btn btn-sm btn-primary" (click)="toggleUpdate(table)"><fa name="pencil"></fa></button>
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -19,7 +25,7 @@
   
   <div class="pt-4 col-md-12">
     <p>
-      <button class="btn btn-primary" type="button" (click)="isEditCollapsed = !isEditCollapsed">
+      <button *ngIf="!updateMode" class="btn btn-primary" type="button" (click)="isEditCollapsed = !isEditCollapsed">
         Ajouter une table
       </button>
     </p>
@@ -33,7 +39,15 @@
               <div *ngIf="f.tableNumero.errors.required">Le numéro de table est requis</div>
             </div>
           </div>
-          <button class="btn btn-success">Créer</button>
+          <button class="btn btn-success">
+            <span *ngIf="!updateMode">Créer</span>
+            <span *ngIf="updateMode">Modifier</span>
+          </button>
+          <span class="ml-2" *ngIf="updateMode" (click)="cancelUpdate()">
+              <button class="btn btn-danger">
+                  <fa name="times"></fa> Annuler
+              </button>
+          </span>
         </form>
       </div>
     </div>

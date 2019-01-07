@@ -25,6 +25,7 @@ export class CommandeComponent implements OnInit {
   searchStatut: number;
   createForm: FormGroup;
   submitted = false;
+  updateMode = false;
 
   constructor(private commandeService: CommandeService, private ouvrierService: OuvrierService, private articleService: ArticleService, private formBuilder: FormBuilder) { }
 
@@ -35,6 +36,8 @@ export class CommandeComponent implements OnInit {
     });
     this.newCommande = new Commande();
     this.newCommande.statut = {id: 0, statutNom: 'Non initié'};
+    this.newCommande.ouvrier = new Ouvrier();
+    this.newCommande.article = new Article();
   }
 
   ngOnInit() {
@@ -96,9 +99,33 @@ export class CommandeComponent implements OnInit {
         });
         this.submitted = false;
         this.isEditCollapsed = false;
+        this.updateMode = false;
       });
     }
   };
 
+  toggleUpdate(commande: Commande) {
+    if (this.updateMode && commande.id === this.newCommande.id) {
+      this.newCommande = new Commande();
+      this.newCommande.statut = {id: 0, statutNom: 'Non initié'};
+      this.newCommande.ouvrier = new Ouvrier();
+      this.newCommande.article = new Article();
+      this.updateMode = false;
+      this.isEditCollapsed = false;
+    } else {
+      this.newCommande = Object.assign({}, commande);
+      this.isEditCollapsed = true;
+      this.updateMode = true;
+    }
+  }
+
+  cancelUpdate() {
+    this.newCommande = new Commande();
+    this.newCommande.statut = {id: 0, statutNom: 'Non initié'};
+    this.newCommande.ouvrier = new Ouvrier();
+    this.newCommande.article = new Article();
+    this.updateMode = false;
+    this.isEditCollapsed = false;
+  }
 
 }

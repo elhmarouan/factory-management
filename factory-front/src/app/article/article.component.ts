@@ -15,6 +15,7 @@ export class ArticleComponent implements OnInit {
   isEditCollapsed: boolean = false;
   createForm: FormGroup;
   submitted = false;
+  updateMode = false;
 
   constructor(private articleService: ArticleService, private formBuilder: FormBuilder) { }
 
@@ -32,6 +33,7 @@ export class ArticleComponent implements OnInit {
     this.newArticle = new Article();
     this.isEditCollapsed = false;
     this.submitted = false;
+    this.updateMode = false;
   }
 
   // convenience getter for easy access to form fields
@@ -58,5 +60,23 @@ export class ArticleComponent implements OnInit {
       });
     }
   };
+
+  toggleUpdate(article: Article) {
+    if (this.updateMode && article.id === this.newArticle.id) {
+      this.newArticle = new Article();
+      this.updateMode = false;
+      this.isEditCollapsed = false;
+    } else {
+      this.newArticle = Object.assign({}, article);
+      this.isEditCollapsed = true;
+      this.updateMode = true;
+    }
+  }
+
+  cancelUpdate() {
+    this.newArticle = new Article();
+    this.updateMode = false;
+    this.isEditCollapsed = false;
+  }
 
 }

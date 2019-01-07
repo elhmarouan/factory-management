@@ -18,6 +18,7 @@ export class OuvrierComponent implements OnInit {
   isEditCollapsed: boolean = false;
   createForm: FormGroup;
   submitted = false;
+  updateMode = false;
 
   constructor(private ouvrierService: OuvrierService, private tableService: TableService, private formBuilder: FormBuilder) { }
 
@@ -40,8 +41,10 @@ export class OuvrierComponent implements OnInit {
       this.tables = data;
     });
     this.newOuvrier = new Ouvrier();
+    this.newOuvrier.tableUsine = new TableUsine();
     this.isEditCollapsed = false;
     this.submitted = false;
+    this.updateMode = false;
   }
 
   // convenience getter for easy access to form fields
@@ -68,5 +71,25 @@ export class OuvrierComponent implements OnInit {
         });
     }
   };
+
+  toggleUpdate(ouvrier: Ouvrier) {
+    if (this.updateMode && ouvrier.id === this.newOuvrier.id) {
+      this.newOuvrier = new Ouvrier();
+      this.newOuvrier.tableUsine = new TableUsine();
+      this.updateMode = false;
+      this.isEditCollapsed = false;
+    } else {
+      this.newOuvrier = Object.assign({}, ouvrier);
+      this.isEditCollapsed = true;
+      this.updateMode = true;
+    }
+  }
+
+  cancelUpdate() {
+    this.newOuvrier = new Ouvrier();
+    this.newOuvrier.tableUsine = new TableUsine();
+    this.updateMode = false;
+    this.isEditCollapsed = false;
+  }
 
 }

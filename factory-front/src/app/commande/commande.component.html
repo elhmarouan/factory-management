@@ -44,7 +44,14 @@
             </select>
           </td>
           <!-- <td>{{commande.statut.statutNom}}</td> -->
-          <td><button class="btn btn-danger btn-sm" (click)="deleteCommande(commande)"><fa name="trash"></fa></button></td>
+          <td>
+              <span>
+                  <button class="btn btn-danger btn-sm" (click)="deleteCommande(commande)"><fa name="trash"></fa></button>              
+              </span>
+              <span class="ml-2">
+                  <button class="btn btn-sm btn-primary" (click)="toggleUpdate(commande)"><fa name="pencil"></fa></button>
+              </span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -52,7 +59,7 @@
   
   <div class="pt-4 col-md-12">
     <p>
-      <button class="btn btn-primary" type="button" (click)="isEditCollapsed = !isEditCollapsed">
+      <button *ngIf="!updateMode" class="btn btn-primary" type="button" (click)="isEditCollapsed = !isEditCollapsed">
         Ajouter une commande
       </button>
     </p>
@@ -70,10 +77,10 @@
   
           <div class="form-group">
             <label for="article">Article:</label>
-            <select [(ngModel)]="newCommande.article" name="article" class="form-control" id="article"
+            <select [(ngModel)]="newCommande.article.id" name="article" class="form-control" id="article"
             formControlName="article" [ngClass]="{ 'is-invalid': submitted && f.article.errors }">
               <option disabled [value]="undefined">Choisissez un article</option>
-              <option *ngFor="let article of articles" [ngValue]="article">{{article.articleNumero}}</option>
+              <option *ngFor="let article of articles | sort : 'articleNumero'" [ngValue]="article.id">{{article.articleNumero}}</option>
             </select>
             <div *ngIf="submitted && f.article.errors" class="invalid-feedback">
               <div *ngIf="f.article.errors.required">L'article est requis</div>
@@ -82,10 +89,10 @@
 
           <div class="form-group">
               <label for="ouvrier">Ouvrier:</label>
-              <select [(ngModel)]="newCommande.ouvrier" name="ouvrier" class="form-control" id="ouvrier"
+              <select [(ngModel)]="newCommande.ouvrier.id" name="ouvrier" class="form-control" id="ouvrier"
               formControlName="ouvrier" [ngClass]="{ 'is-invalid': submitted && f.ouvrier.errors }">
                 <option disabled [value]="undefined">Choisissez un ouvrier</option>
-                <option *ngFor="let ouvrier of ouvriers" [ngValue]="ouvrier">{{ouvrier.ouvrierNom}} {{ouvrier.ouvrierPrenom}}</option>
+                <option *ngFor="let ouvrier of ouvriers" [ngValue]="ouvrier.id">{{ouvrier.ouvrierNom}} {{ouvrier.ouvrierPrenom}}</option>
               </select>
               <div *ngIf="submitted && f.ouvrier.errors" class="invalid-feedback">
                 <div *ngIf="f.ouvrier.errors.required">L'ouvrier est requis</div>
@@ -102,8 +109,15 @@
                 <div *ngIf="f.statut.errors.required">Le statut de la commande est requis</div>
               </div>              
           </div>   
-  
-          <button class="btn btn-success">Créer</button>
+          <button class="btn btn-success">
+              <span *ngIf="!updateMode">Créer</span>
+              <span *ngIf="updateMode">Modifier</span>
+          </button>
+          <span class="ml-2" *ngIf="updateMode" (click)="cancelUpdate()">
+              <button class="btn btn-danger">
+                  <fa name="times"></fa> Annuler
+              </button>
+          </span>
         </form>
       </div>
     </div>

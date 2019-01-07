@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomErrorHandler } from './common/custom-error-handler';
 import { TokenInterceptor } from './common/auth/token.interceptor';
+import { ArraySortPipe } from './common/pipes/array-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { TokenInterceptor } from './common/auth/token.interceptor';
     ArticleComponent,
     CommandeComponent,
     FilterPipe,
+    ArraySortPipe,
     LoginComponent
   ],
   imports: [

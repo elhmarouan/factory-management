@@ -13,6 +13,7 @@ export class TableComponent implements OnInit {
   tables: TableUsine[];
   newTable: TableUsine = new TableUsine();
   isEditCollapsed: boolean = false;
+  updateMode: boolean = false;
   createForm: FormGroup;
   submitted = false;
 
@@ -33,6 +34,7 @@ export class TableComponent implements OnInit {
     this.newTable = new TableUsine();
     this.isEditCollapsed = false;
     this.submitted = false;
+    this.updateMode = false;
   }
 
   // convenience getter for easy access to form fields
@@ -59,4 +61,23 @@ export class TableComponent implements OnInit {
         });
     }
   };
+
+  toggleUpdate(table: TableUsine) {
+    if (this.updateMode && table.id === this.newTable.id) {
+      this.newTable = new TableUsine();
+      this.updateMode = false;
+      this.isEditCollapsed = false;
+    } else {
+      this.newTable = Object.assign({}, table);
+      this.isEditCollapsed = true;
+      this.updateMode = true;
+    }
+  }
+
+  cancelUpdate() {
+    this.newTable = new TableUsine();
+    this.updateMode = false;
+    this.isEditCollapsed = false;
+  }
+
 }
