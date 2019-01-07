@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomErrorHandler } from './common/custom-error-handler';
 import { TokenInterceptor } from './common/auth/token.interceptor';
+import { AuthService } from './common/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { TokenInterceptor } from './common/auth/token.interceptor';
     TableService,
     ArticleService,
     CommandeService,
+    AuthService,
     {
       provide: ErrorHandler,
       useClass: CustomErrorHandler,

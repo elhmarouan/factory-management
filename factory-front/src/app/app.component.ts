@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './common/model/user.model';
+import { AuthService } from './common/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +9,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   navbarCollapsed = true;
+  currentUser: User;
 
-  logout() {
-    
+  constructor(private authService: AuthService) { }
+
+  loadCurrentUser() {
+    this.authService.getCurrentUser()
+    .subscribe(data => {
+      console.info(data);
+      this.currentUser = data;
+      console.info(this.currentUser);
+    });
+  }
+
+  ngOnInit() {
+    this.loadCurrentUser();
   }
 }
