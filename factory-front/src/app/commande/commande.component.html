@@ -18,6 +18,17 @@
             </select>
             <button type="button" (click)="searchStatut=undefined" class="btn btn-secondary btn-sm ml-3"><fa name="minus"></fa></button>
         </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Semaine</span>
+            </div>
+            <select [(ngModel)]="searchSemaine" name="searchSemaine" class="form-control" id="searchSemaine">
+                <option disabled [value]="undefined">Rechercher par semaine</option>
+                <option *ngFor="let semaine of semaines" [value]="semaine.id">{{semaine.semaineNom}}</option>
+            </select>
+            <button type="button" (click)="searchSemaine=undefined" class="btn btn-secondary btn-sm ml-3"><fa name="minus"></fa></button>
+        </div>
     </form>
 </div>
 
@@ -29,15 +40,21 @@
           <th>Numéro de commande</th>
           <th>Article</th>
           <th>Ouvrier</th>
+          <th>Semaine</th>
           <th>Statut</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let commande of commandes | filter : searchStatut : searchString">
+        <tr *ngFor="let commande of commandes | filter : searchStatut : searchSemaine : searchString">
           <td>{{commande.commandeNumero}}</td>
           <td>{{commande.article.articleNumero}}</td>
           <td>{{commande.ouvrier.ouvrierNom}} {{commande.ouvrier.ouvrierPrenom}}</td>
+          <td>
+            <span *ngIf="commande.semaine">
+                {{commande.semaine.semaineNom}}
+            </span>
+          </td>
           <td>
             <select [(ngModel)]="commande.statut.id" (change)="onStatutChange($event, commande)" name="statutCommande" class="form-control select-width-auto" id="statutCommande">
               <option *ngFor="let statut of statuts" [value]="statut.id">{{statut.statutNom}}</option>
@@ -98,6 +115,18 @@
                 <div *ngIf="f.ouvrier.errors.required">L'ouvrier est requis</div>
               </div>           
           </div>   
+
+          <div class="form-group">
+            <label for="semaine">Semaine:</label>
+            <select [(ngModel)]="newCommande.semaine.id" name="semaine" class="form-control" id="semaine"
+            formControlName="semaine" [ngClass]="{ 'is-invalid': submitted && f.semaine.errors }">
+              <option disabled [value]="undefined">Choisissez la semaine</option>
+              <option *ngFor="let semaine of semaines" [ngValue]="semaine.id">{{semaine.semaineNom}}</option>
+            </select>
+            <div *ngIf="submitted && f.semaine.errors" class="invalid-feedback">
+              <div *ngIf="f.semaine.errors.required">La semaine est requise</div>
+            </div>           
+        </div>   
 
           <div class="form-group">
               <label for="statut">Statut:</label>

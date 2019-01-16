@@ -7,14 +7,14 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
 @Injectable()
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], statut: number, value: string): any[] {
+  transform(items: any[], statut: number, semaine: number, value: string): any[] {
     if (!items) {
       return [];
     }
 
     let filteredItems: any[] = items;
 
-    if (!value && !statut) {
+    if (!value && !statut && !semaine) {
       return items;
     }
 
@@ -29,6 +29,11 @@ export class FilterPipe implements PipeTransform {
     if (statut) {
       filteredItems = filteredItems.filter(singleItem =>
         singleItem.statut.id == statut);
+    }
+
+    if (semaine) {
+      filteredItems = filteredItems.filter(singleItem =>
+        singleItem.semaine.id == semaine);
     }
 
     return filteredItems;

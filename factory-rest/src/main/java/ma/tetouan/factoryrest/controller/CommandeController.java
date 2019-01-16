@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.tetouan.factoryrest.model.Commande;
+import ma.tetouan.factoryrest.model.Semaine;
 import ma.tetouan.factoryrest.model.Statut;
 import ma.tetouan.factoryrest.service.CommandeService;
+import ma.tetouan.factoryrest.service.SemaineService;
 import ma.tetouan.factoryrest.service.StatutService;
 
 @RestController
@@ -25,6 +27,9 @@ public class CommandeController {
 	
 	@Autowired
 	StatutService statutService;
+	
+	@Autowired
+	SemaineService semaineService;
 
     @GetMapping
     public List<Commande> getAllCommande(){
@@ -49,5 +54,10 @@ public class CommandeController {
     @GetMapping(path = {"/statut"})
     public List<Statut> getAllStatuts(){
         return statutService.findAll();
+    }
+    
+    @GetMapping(path = {"/semaine"})
+    public List<Semaine> getAllSemaines(){
+        return semaineService.findAll();
     }
 }

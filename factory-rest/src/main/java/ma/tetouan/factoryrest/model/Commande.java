@@ -30,6 +30,10 @@ public class Commande {
 	@ManyToOne 
 	@JoinColumn(nullable = false) 
 	protected Ouvrier ouvrier;
+	
+	@ManyToOne 
+	@JoinColumn(nullable = false)
+	protected Semaine semaine;
 
 	public Integer getId() {
 		return id;
@@ -69,6 +73,14 @@ public class Commande {
 
 	public void setOuvrier(Ouvrier ouvrier) {
 		this.ouvrier = ouvrier;
+	}
+
+	public Semaine getSemaine() {
+		return semaine;
+	}
+
+	public void setSemaine(Semaine semaine) {
+		this.semaine = semaine;
 	}
 
 }

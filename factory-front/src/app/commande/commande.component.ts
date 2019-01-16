@@ -8,6 +8,7 @@ import { OuvrierService } from '../ouvrier/ouvrier.service';
 import { CommandeService } from '../commande/commande.service';
 import { ArticleService } from '../article/article.service';
 import { Statut } from '../common/model/statut.model';
+import { Semaine } from '../common/model/semaine.model';
 
 @Component({
   selector: 'app-commande',
@@ -20,9 +21,11 @@ export class CommandeComponent implements OnInit {
   articles: Article[];
   ouvriers: Ouvrier[];
   statuts: Statut[];
+  semaines: Semaine[];
   isEditCollapsed: boolean = false;
   searchString: string;
   searchStatut: number;
+  searchSemaine: number;
   createForm: FormGroup;
   submitted = false;
   updateMode = false;
@@ -38,6 +41,7 @@ export class CommandeComponent implements OnInit {
     this.newCommande.statut = {id: 0, statutNom: 'Non initié'};
     this.newCommande.ouvrier = new Ouvrier();
     this.newCommande.article = new Article();
+    this.newCommande.semaine = new Semaine();
   }
 
   ngOnInit() {
@@ -45,7 +49,8 @@ export class CommandeComponent implements OnInit {
       commandNumber: ['', Validators.required],
       article: ['', Validators.required],
       ouvrier: ['', Validators.required],
-      statut: ['', Validators.required]
+      statut: ['', Validators.required],
+      semaine: ['', Validators.required]
     });
     this.loadCommands();
     this.ouvrierService.getOuvriers()
@@ -59,6 +64,10 @@ export class CommandeComponent implements OnInit {
     this.commandeService.getStatuts()
     .subscribe( data => {
       this.statuts = data;
+    });
+    this.commandeService.getSemaines()
+    .subscribe( data => {
+      this.semaines = data;
     });
   }
 
@@ -95,7 +104,8 @@ export class CommandeComponent implements OnInit {
           commandNumber: ['', Validators.required],
           article: ['', Validators.required],
           ouvrier: ['', Validators.required],
-          statut: ['', Validators.required]
+          statut: ['', Validators.required],
+          semaine: ['', Validators.required]
         });
         this.submitted = false;
         this.isEditCollapsed = false;
@@ -110,6 +120,7 @@ export class CommandeComponent implements OnInit {
       this.newCommande.statut = {id: 0, statutNom: 'Non initié'};
       this.newCommande.ouvrier = new Ouvrier();
       this.newCommande.article = new Article();
+      this.newCommande.semaine = new Semaine();
       this.updateMode = false;
       this.isEditCollapsed = false;
     } else {
@@ -124,6 +135,7 @@ export class CommandeComponent implements OnInit {
     this.newCommande.statut = {id: 0, statutNom: 'Non initié'};
     this.newCommande.ouvrier = new Ouvrier();
     this.newCommande.article = new Article();
+    this.newCommande.semaine = new Semaine();
     this.updateMode = false;
     this.isEditCollapsed = false;
   }
