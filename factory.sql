@@ -132,3 +132,12 @@ INSERT INTO `semaine` (`id`, `semaine_nom`) VALUES ('52', 'S52');
 INSERT INTO `semaine` (`id`, `semaine_nom`) VALUES ('53', 'S53');
 INSERT INTO `semaine` (`id`, `semaine_nom`) VALUES ('54', 'S54');
 
+---------------------------------
+-- Ajout des colonnes nb_heures dans article et commande 
+
+ALTER TABLE article
+ADD nb_heures LONG;
+
+ALTER TABLE commande
+ADD nb_heures LONG;
+
