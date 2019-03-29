@@ -106,7 +106,8 @@ export class CommandeComponent implements OnInit {
           article: ['', Validators.required],
           ouvrier: ['', Validators.required],
           statut: ['', Validators.required],
-          semaine: ['', Validators.required]
+          semaine: ['', Validators.required],
+          nbHeures: ['']
         });
         this.submitted = false;
         this.isEditCollapsed = false;
@@ -143,7 +144,7 @@ export class CommandeComponent implements OnInit {
 
   calculRendement(commande: Commande, article: Article) {
     if (commande.nbHeures && article.nbHeures) {
-      return (article.nbHeures * 100 / commande.nbHeures ) + ' %';
+      return Math.round(article.nbHeures * 100 / commande.nbHeures ) + ' %';
     }
   }
 
