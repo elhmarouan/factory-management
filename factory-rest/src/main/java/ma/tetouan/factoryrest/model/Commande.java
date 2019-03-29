@@ -34,6 +34,9 @@ public class Commande {
 	@ManyToOne 
 	@JoinColumn(nullable = false)
 	protected Semaine semaine;
+	
+	@Column
+	protected Long nbHeures;
 
 	public Integer getId() {
 		return id;
@@ -81,6 +84,14 @@ public class Commande {
 
 	public void setSemaine(Semaine semaine) {
 		this.semaine = semaine;
+	}
+	
+	public Long getNbHeures() {
+		return nbHeures;
+	}
+
+	public void setNbHeures(Long nbHeures) {
+		this.nbHeures = nbHeures;
 	}
 
 }

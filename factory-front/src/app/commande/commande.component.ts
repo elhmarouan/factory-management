@@ -50,7 +50,8 @@ export class CommandeComponent implements OnInit {
       article: ['', Validators.required],
       ouvrier: ['', Validators.required],
       statut: ['', Validators.required],
-      semaine: ['', Validators.required]
+      semaine: ['', Validators.required],
+      nbHeures: ['']
     });
     this.loadCommands();
     this.ouvrierService.getOuvriers()
@@ -138,6 +139,12 @@ export class CommandeComponent implements OnInit {
     this.newCommande.semaine = new Semaine();
     this.updateMode = false;
     this.isEditCollapsed = false;
+  }
+
+  calculRendement(commande: Commande, article: Article) {
+    if (commande.nbHeures && article.nbHeures) {
+      return (article.nbHeures * 100 / commande.nbHeures ) + ' %';
+    }
   }
 
 }

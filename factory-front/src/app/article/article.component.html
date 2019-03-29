@@ -4,12 +4,14 @@
       <thead>
         <tr>
           <th>Numero d'article</th>
+          <th>Nombre d'heures</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let article of articles | sort : 'articleNumero'">
           <td>{{article.articleNumero}}</td>
+          <td>{{article.nbHeures}}</td>
           <td>
               <span>
                   <button class="btn btn-danger btn-sm" (click)="deleteArticle(article)"><fa name="trash"></fa></button>
@@ -38,6 +40,14 @@
             formControlName="articleNumero" [ngClass]="{ 'is-invalid': submitted && f.articleNumero.errors }">
             <div *ngIf="submitted && f.articleNumero.errors" class="invalid-feedback">
               <div *ngIf="f.articleNumero.errors.required">Le numéro de l'article est requis</div>
+            </div> 
+          </div>
+          <div class="form-group">
+            <label for="nbHeures">Nombre d'heures:</label>
+            <input [(ngModel)]="newArticle.nbHeures" placeholder="Nombre d'heures" name="nbHeures" class="form-control" id="nbHeures"
+            formControlName="nbHeures" [ngClass]="{ 'is-invalid': submitted && f.nbHeures.errors }">
+            <div *ngIf="submitted && f.nbHeures.errors" class="invalid-feedback">
+              <div *ngIf="f.nbHeures.errors.required">Le nombre d'heures est requis</div>
             </div> 
           </div>
           <button class="btn btn-success">

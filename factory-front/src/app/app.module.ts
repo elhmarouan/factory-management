@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CustomErrorHandler } from './common/custom-error-handler';
 import { TokenInterceptor } from './common/auth/token.interceptor';
 import { ArraySortPipe } from './common/pipes/array-sort.pipe';
+import { ReversePipe } from './common/pipes/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ArraySortPipe } from './common/pipes/array-sort.pipe';
     CommandeComponent,
     FilterPipe,
     ArraySortPipe,
+    ReversePipe,
     LoginComponent
   ],
   imports: [

@@ -10,4 +10,5 @@ export class Commande {
     ouvrier: Ouvrier;
     statut: Statut;
     semaine: Semaine;
+    nbHeures: number;
 }

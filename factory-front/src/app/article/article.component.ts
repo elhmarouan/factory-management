@@ -27,7 +27,8 @@ export class ArticleComponent implements OnInit {
   }
   ngOnInit() {
     this.createForm = this.formBuilder.group({
-      articleNumero: ['', Validators.required]
+      articleNumero: ['', Validators.required],
+      nbHeures: ['']
     });
     this.loadArticles();
     this.newArticle = new Article();

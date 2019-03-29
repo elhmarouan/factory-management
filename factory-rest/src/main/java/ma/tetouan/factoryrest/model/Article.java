@@ -17,6 +17,9 @@ public class Article
 	@Column(nullable = false) 
 	protected String articleNumero;
 	
+	@Column
+	protected Long nbHeures;
+	
 //	@OneToMany(mappedBy = "article") 
 //	protected Set<Commande> commande;
 
@@ -34,6 +37,14 @@ public class Article
 
 	public void setArticleNumero(String articleNumero) {
 		this.articleNumero = articleNumero;
+	}
+
+	public Long getNbHeures() {
+		return nbHeures;
+	}
+
+	public void setNbHeures(Long nbHeures) {
+		this.nbHeures = nbHeures;
 	}
 
 //	public Set<Commande> getCommande() {

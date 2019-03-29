@@ -41,12 +41,14 @@
           <th>Article</th>
           <th>Ouvrier</th>
           <th>Semaine</th>
+          <th>Heures réalisées</th>
+          <th>Rendement</th>
           <th>Statut</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let commande of commandes | filter : searchStatut : searchSemaine : searchString">
+        <tr *ngFor="let commande of commandes | reverse | filter : searchStatut : searchSemaine : searchString">
           <td>{{commande.commandeNumero}}</td>
           <td>{{commande.article.articleNumero}}</td>
           <td>{{commande.ouvrier.ouvrierNom}} {{commande.ouvrier.ouvrierPrenom}}</td>
@@ -55,6 +57,8 @@
                 {{commande.semaine.semaineNom}}
             </span>
           </td>
+          <td>{{commande.nbHeures}}</td>
+          <td>{{calculRendement(commande, commande.article)}}</td>
           <td>
             <select [(ngModel)]="commande.statut.id" (change)="onStatutChange($event, commande)" name="statutCommande" class="form-control select-width-auto" id="statutCommande">
               <option *ngFor="let statut of statuts" [value]="statut.id">{{statut.statutNom}}</option>
@@ -128,6 +132,15 @@
             </div>           
         </div>   
 
+        <div class="form-group">
+          <label for="nbHeures">Heures réalisées:</label>
+          <input [(ngModel)]="newCommande.nbHeures" placeholder="Nombre d'heures" name="nbHeures" class="form-control" id="nbHeures"
+          formControlName="nbHeures" [ngClass]="{ 'is-invalid': submitted && f.nbHeures.errors }">
+          <div *ngIf="submitted && f.nbHeures.errors" class="invalid-feedback">
+            <div *ngIf="f.nbHeures.errors.required">Le nombre d'heures est requis</div>
+          </div>            
+        </div>
+
           <div class="form-group">
               <label for="statut">Statut:</label>
               <select [(ngModel)]="newCommande.statut.id" name="statut" class="form-control" id="statut"
@@ -137,7 +150,8 @@
               <div *ngIf="submitted && f.statut.errors" class="invalid-feedback">
                 <div *ngIf="f.statut.errors.required">Le statut de la commande est requis</div>
               </div>              
-          </div>   
+          </div> 
+
           <button class="btn btn-success">
               <span *ngIf="!updateMode">Créer</span>
               <span *ngIf="updateMode">Modifier</span>
